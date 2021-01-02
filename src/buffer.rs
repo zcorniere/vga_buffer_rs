@@ -79,3 +79,10 @@ impl BasicBufferManipulation for Buffer {
         self.col_pos = 0;
     }
 }
+
+impl core::fmt::Write for Buffer {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
+}

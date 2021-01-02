@@ -105,3 +105,10 @@ impl BasicBufferManipulation for VgaBuffer {
         }
     }
 }
+
+impl core::fmt::Write for VgaBuffer {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
+}
