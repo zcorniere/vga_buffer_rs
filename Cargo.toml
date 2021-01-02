@@ -3,6 +3,9 @@ name = "vga_buffer_rs"
 version = "0.1.0"
 authors = ["Zacharie Corniere <cornierez@gmail.com>"]
 edition = "2018"
+description = "A rust crate that allow easy Vga text buffer manipulation"
+repository = "https://github.com/zcorniere/vga_buffer_rs"
+license = "GPL-3.0-or-later"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
