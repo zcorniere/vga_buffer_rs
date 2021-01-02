@@ -5,13 +5,13 @@ use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_WIDTH};
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy)]
 pub struct RawBuffer {
-    chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
+    pub chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
 #[derive(Debug, Clone, Copy)]
 pub struct Buffer {
     col_pos: usize,
-    buffer: RawBuffer,
+    pub buffer: RawBuffer,
 }
 
 impl Buffer {

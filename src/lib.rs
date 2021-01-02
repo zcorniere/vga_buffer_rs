@@ -4,9 +4,9 @@
 pub const BUFFER_HEIGHT: usize = 25;
 pub const BUFFER_WIDTH: usize = 80;
 
-mod buffer;
-mod cursor;
-mod vga_buffer;
+pub mod buffer;
+pub mod cursor;
+pub mod vga_buffer;
 
 #[allow(dead_code)]
 #[repr(u8)]
