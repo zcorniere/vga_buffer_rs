@@ -4,11 +4,13 @@ use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_WIDTH};
 
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy)]
+/// Raw buffer representing the vga buffer area
 pub struct RawBuffer {
     pub chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
 #[derive(Debug, Clone, Copy)]
+/// A buffer that represent a vga buffer.
 pub struct Buffer {
     col_pos: usize,
     pub buffer: RawBuffer,

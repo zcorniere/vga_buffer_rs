@@ -48,11 +48,19 @@ impl Default for ColorPair {
 
 #[repr(C)]
 #[derive(Default, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+/// Rust representation of a vga char.
+///
+/// 1 byte is for the char itself
+/// 4 bits are for the foreground color
+/// 4 bits are for the background color
 pub struct ScreenChar {
     pub ascii_char: u8,
     pub color_code: ColorPair,
 }
 
+/// Implement very basic buffer manipulation
+/// - print string
+/// - new line
 pub trait BasicBufferManipulation {
     fn write_byte(&mut self, byte: u8);
     fn write_string(&mut self, s: &str);
