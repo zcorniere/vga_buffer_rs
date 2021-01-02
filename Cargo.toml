@@ -1,5 +1,5 @@
 [package]
-name = "vga_buffer_manipulation"
+name = "vga_buffer_rs"
 version = "0.1.0"
 authors = ["Zacharie Corniere <cornierez@gmail.com>"]
 edition = "2018"
