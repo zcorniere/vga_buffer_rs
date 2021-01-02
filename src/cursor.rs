@@ -1,18 +1,32 @@
 use crate::BUFFER_WIDTH;
 
 #[derive(Default, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+/// Structure to manipulate the cursor of the vga buffer
 pub struct Cursor {
     pub x: usize,
     pub y: usize,
-    disabled: bool,
 }
 
 impl Cursor {
-    pub unsafe fn update(&self) {
-        if self.disabled {
-            return;
+    /// Create new cursor at the given coords
+    ///
+    /// - x : horizontal coordinate
+    /// - y : vertical coordinate
+    /// - disable : remove the blinking cursor
+    pub fn new(x: usize, y: usize, disable: bool) -> Self {
+        let mut ret = Self { x, y };
+        unsafe {
+            if disable {
+                ret.disable();
+            }
+            ret.update();
         }
-        let pos: u16 = self.x as u16 * BUFFER_WIDTH as u16 + self.y as u16;
+        ret
+    }
+
+    /// Update cursor position
+    pub unsafe fn update(&self) {
+        let pos: u16 = self.y as u16 * BUFFER_WIDTH as u16 + self.x as u16;
         llvm_asm!("outb %al,%dx"
             :
             :"{dx}"(0x3D4),"{al}"(0x0F)
@@ -35,10 +49,8 @@ impl Cursor {
         );
     }
 
+    /// Disable the blinking cursor
     pub unsafe fn disable(&mut self) {
-        if self.disabled {
-            return;
-        }
         llvm_asm!("outb %al, %dx"
             :
             :"{dx}"(0x3d4), "{al}"(0x0a)
@@ -49,6 +61,5 @@ impl Cursor {
             :"{dx}"(0x3d5), "{al}"(0x20)
             :
         );
-        self.disabled = true;
     }
 }

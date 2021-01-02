@@ -19,14 +19,10 @@ pub struct VgaBuffer {
 
 impl VgaBuffer {
     pub fn new(cursor_on: bool) -> Self {
-        let mut ret = Self::default();
-        unsafe {
-            ret.cursor.update();
-            if cursor_on {
-                ret.cursor.disable();
-            }
+        Self {
+            cursor: Cursor::new(0, BUFFER_HEIGHT - 1, !cursor_on),
+            ..Default::default()
         }
-        ret
     }
 }
 
