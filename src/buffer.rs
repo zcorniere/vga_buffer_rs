@@ -1,6 +1,8 @@
 use crate::BasicBufferManipulation;
 use crate::ColorPair;
-use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_WIDTH};
+use crate::Draw;
+use crate::DrawTarget;
+use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_SIZE, BUFFER_WIDTH};
 
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy)]
@@ -79,6 +81,27 @@ impl BasicBufferManipulation for Buffer {
             self.clear_row(row);
         }
         self.col_pos = 0;
+    }
+}
+
+impl DrawTarget for Buffer {
+    fn draw<T: Draw>(&mut self, obj: &T) -> bool {
+        if obj.get_pos() > BUFFER_SIZE || obj.get_size() > BUFFER_SIZE {
+            return false;
+        }
+        for y in obj.get_pos().0..obj.get_size().0 {
+            let obj_raw = obj.get_line(y).unwrap();
+            for x in 0..obj_raw.len() {
+                if obj.is_transparent() && obj_raw[x] == b' ' {
+                    continue;
+                }
+                self.buffer.chars[y][x + obj.get_pos().1] = ScreenChar {
+                    ascii_char: obj_raw[x],
+                    ..Default::default()
+                };
+            }
+        }
+        true
     }
 }
 

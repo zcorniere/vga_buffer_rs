@@ -1,11 +1,15 @@
 #![no_std]
 #![feature(llvm_asm)]
 
+extern crate alloc;
+
 pub const BUFFER_HEIGHT: usize = 25;
 pub const BUFFER_WIDTH: usize = 80;
+pub const BUFFER_SIZE: (usize, usize) = (BUFFER_HEIGHT, BUFFER_WIDTH);
 
 pub mod buffer;
 pub mod cursor;
+pub mod draw;
 pub mod vga_buffer;
 
 #[allow(dead_code)]
@@ -67,4 +71,34 @@ pub trait BasicBufferManipulation {
     fn new_line(&mut self);
     fn clear_row(&mut self, row: usize);
     fn clear(&mut self);
+}
+
+/// Implement the ability to draw an object on screen
+pub trait DrawTarget {
+    /// Should return false if the obj can't fit on screen.
+    fn draw<T: Draw>(&mut self, obj: &T) -> bool;
+}
+
+/// Trait to implement to be passed to a DrawTarget
+///
+/// The drawing MUST be a rectangle.
+pub trait Draw {
+    /// get tuple (y, x) of the upper left corner of the drawing
+    fn get_pos(&self) -> (usize, usize);
+    /// get tuple (y, x) of the lower right corner of the drawing
+    fn get_size(&self) -> (usize, usize);
+    /// should the ' ' be printed or not
+    ///
+    /// buffer is ['a', 'b', 'v']
+    /// and line is [' ', 'i', 'b']
+    ///
+    /// if is_transparent is true, result should be
+    /// ['a', 'i', 'b']
+    /// else it should be
+    /// [' ', 'i', 'b']
+    fn is_transparent(&self) -> bool;
+    /// get a single line of the drawing
+    ///
+    /// return None if 'l' is out of range
+    fn get_line(&self, l: usize) -> Option<&[u8]>;
 }
