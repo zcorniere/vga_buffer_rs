@@ -1,8 +1,7 @@
-use crate::BasicBufferManipulation;
-use crate::ColorPair;
-use crate::Draw;
-use crate::DrawTarget;
-use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_SIZE, BUFFER_WIDTH};
+use crate::{
+    BasicBufferManipulation, ColorPair, Draw, DrawTarget, ScreenChar, BUFFER_HEIGHT, BUFFER_SIZE,
+    BUFFER_WIDTH,
+};
 
 #[repr(transparent)]
 #[derive(Debug, Clone, Copy)]

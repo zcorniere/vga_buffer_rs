@@ -1,10 +1,9 @@
-use crate::buffer::Buffer;
-use crate::buffer::RawBuffer;
-use crate::cursor::Cursor;
-use crate::BasicBufferManipulation;
-use crate::ColorPair;
-use crate::{Draw, DrawTarget};
-use crate::{ScreenChar, BUFFER_HEIGHT, BUFFER_SIZE, BUFFER_WIDTH};
+use crate::{
+    buffer::{Buffer, RawBuffer},
+    cursor::Cursor,
+    BasicBufferManipulation, ColorPair, Draw, DrawTarget, ScreenChar, BUFFER_HEIGHT, BUFFER_SIZE,
+    BUFFER_WIDTH,
+};
 use volatile::Volatile;
 
 pub const VGA_BUFFER: *mut u8 = 0xb8000 as *mut u8;

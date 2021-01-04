@@ -1,11 +1,8 @@
-use vga_buffer_rs::buffer::Buffer;
-use vga_buffer_rs::draw::BoxShape;
-use vga_buffer_rs::draw::SHAPE_SIDE;
-use vga_buffer_rs::draw::SHAPE_UP;
-use vga_buffer_rs::DrawTarget;
-use vga_buffer_rs::BUFFER_HEIGHT;
-use vga_buffer_rs::BUFFER_SIZE;
-use vga_buffer_rs::BUFFER_WIDTH;
+use vga_buffer_rs::{
+    buffer::Buffer,
+    draw::{BoxShape, SHAPE_SIDE, SHAPE_UP},
+    DrawTarget, BUFFER_HEIGHT, BUFFER_SIZE, BUFFER_WIDTH,
+};
 
 #[test]
 fn test_draw_not_transparent() {
@@ -59,7 +56,7 @@ fn test_draw_transparent() {
         println!();
     }
     for i in 1..19 {
-            assert_eq!(b.buffer.chars[i][19].ascii_char, SHAPE_SIDE);
+        assert_eq!(b.buffer.chars[i][19].ascii_char, SHAPE_SIDE);
     }
     for i in 1..b.buffer.chars.len() - 1 {
         assert_eq!(b.buffer.chars[i][0].ascii_char, SHAPE_SIDE);

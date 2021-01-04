@@ -1,6 +1,4 @@
-use vga_buffer_rs::buffer::Buffer;
-use vga_buffer_rs::BasicBufferManipulation;
-use vga_buffer_rs::BUFFER_HEIGHT;
+use vga_buffer_rs::{buffer::Buffer, BasicBufferManipulation, BUFFER_HEIGHT};
 
 #[test]
 fn many_print() {

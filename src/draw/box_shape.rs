@@ -1,6 +1,7 @@
-use crate::draw::SHAPE_SIDE;
-use crate::draw::SHAPE_UP;
-use crate::Draw;
+use crate::{
+    draw::{SHAPE_SIDE, SHAPE_UP},
+    Draw,
+};
 use alloc::vec::Vec;
 
 pub struct BoxShape {
